@@ -4,7 +4,7 @@ from .forms import TodoForm
 from . import tables
 import django_tables2
 from django.contrib.auth.mixins import LoginRequiredMixin
-
+from . import forms
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.shortcuts import redirect
@@ -14,9 +14,14 @@ class TodoListView(LoginRequiredMixin, django_tables2.SingleTableView):
     paginate_by = 10
     table_class = tables.TodoTable
 
-    def get_queryset(self):
-        return self.model.objects.filter(user=self.request.user)
+    extra_context = {'form': forms.SearchForm()}
 
+    def get_queryset(self):
+        try:
+            keyword = self.request.GET['search']
+            return self.model.objects.filter(user=self.request.user).filter(title__icontains=keyword)
+        except:
+            return self.model.objects.filter(user=self.request.user)
 
 class TodoCreateView(LoginRequiredMixin, CreateView):
     model = Todo

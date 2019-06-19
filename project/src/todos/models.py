@@ -21,6 +21,7 @@ class Todo(models.Model):
     created = models.DateTimeField(auto_now_add=True, editable=False)
     last_updated = models.DateTimeField(auto_now=True, editable=False)
     description = models.TextField(max_length=225)
+    status = models.IntegerField(default=1)
 
     # Relationship Fields
     user = models.ForeignKey(
