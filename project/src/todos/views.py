@@ -46,6 +46,11 @@ class TodoUpdateView(LoginRequiredMixin,UpdateView):
     model = Todo
     form_class = TodoForm
 
+    def get_form(self, form_class=None):
+        form: TodoForm = super(TodoUpdateView, self).get_form(form_class)
+        form.user = self.request.user
+        return form
+
     def get_success_url(self):
         return reverse_lazy('todos_todo_list')
 
