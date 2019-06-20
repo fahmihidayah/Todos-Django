@@ -36,6 +36,10 @@ class Todo(models.Model):
         return u'%s' % self.slug
 
     @property
+    def status_str(self) -> str:
+        return "New" if self.status == 1 else "Done"
+
+    @property
     def get_list_url(self):
         return reverse('todos_todo_list')
 
@@ -46,6 +50,10 @@ class Todo(models.Model):
     @property
     def get_update_url(self):
         return reverse('todos_todo_update', args=(self.slug,))
+
+    @property
+    def get_update_status_url(self):
+        return reverse('todos_todo_update_status', args=(self.slug,))
 
     @property
     def get_delete_url(self):

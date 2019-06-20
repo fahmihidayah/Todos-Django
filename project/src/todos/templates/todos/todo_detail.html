@@ -1,5 +1,6 @@
 {% extends "admin/base.html" %}
 {% load static %}
+{% load crispy_forms_tags %}
 {% block content %}
 
 <div class="box box-primary">
@@ -30,9 +31,20 @@
                 <td>{{ object.description }}</td>
             </tr>
         </table>
-        <a class="btn btn-primary" href="{{object.get_update_url}}">Edit Todo</a>
 
-        <a class="btn btn-success" href="{{object.get_update_url}}">Set Done</a>
+        <form method="post" action="{{ object.get_update_status_url }}">
+            <a class="btn btn-primary" href="{{object.get_update_url}}">Edit Todo</a>
+            {% csrf_token %}
+
+            {% if object.status == 1 %}
+                <input type="hidden" name="status" value="2"/>
+                <button class="btn btn-success" href="{{object.get_update_url}}">Set Done</button>
+            {% else %}
+                <input type="hidden" name="status" value="1"/>
+                <button class="btn btn-primary" href="{{object.get_update_url}}">Set Not Done</button>
+            {% endif %}
+        </form>
+
 
     </div>
 </div>

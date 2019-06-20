@@ -19,7 +19,11 @@ class TodoListView(LoginRequiredMixin, django_tables2.SingleTableView):
     def get_queryset(self):
         try:
             keyword = self.request.GET['search']
-            return self.model.objects.filter(user=self.request.user).filter(title__icontains=keyword)
+            status = self.request.GET['status']
+            if status == '0':
+                return self.model.objects.filter(user=self.request.user).filter(title__icontains=keyword)
+            else:
+                return self.model.objects.filter(user=self.request.user).filter(title__icontains=keyword).filter(status=status)
         except:
             return self.model.objects.filter(user=self.request.user)
 
@@ -46,6 +50,11 @@ class TodoDeleteView(LoginRequiredMixin, DeleteView):
 class TodoDetailView(LoginRequiredMixin,DetailView):
     model = Todo
 
+    def get_context_data(self, **kwargs):
+        context = super(TodoDetailView, self).get_context_data()
+        context.update({'form': forms.TodoUpdateStatusForm()})
+        return context
+
 
 class TodoUpdateView(LoginRequiredMixin,UpdateView):
     model = Todo
@@ -53,6 +62,19 @@ class TodoUpdateView(LoginRequiredMixin,UpdateView):
 
     def get_form(self, form_class=None):
         form: TodoForm = super(TodoUpdateView, self).get_form(form_class)
+        form.user = self.request.user
+        return form
+
+    def get_success_url(self):
+        return reverse_lazy('todos_todo_list')
+
+
+class TodoUpdateDoneView(LoginRequiredMixin, UpdateView):
+    model = Todo
+    form_class = forms.TodoUpdateStatusForm
+
+    def get_form(self, form_class=None):
+        form: TodoForm = super(TodoUpdateDoneView, self).get_form(form_class)
         form.user = self.request.user
         return form
 

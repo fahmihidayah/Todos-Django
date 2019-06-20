@@ -20,5 +20,7 @@ urlpatterns += (
     path('todos/todo/detail/<slug:slug>/', views.TodoDetailView.as_view(), name='todos_todo_detail'),
     path('todos/todo/update/<slug:slug>/', views.TodoUpdateView.as_view(), name='todos_todo_update'),
     path('todos/todo/delete/<slug:slug>/', views.TodoDeleteView.as_view(), name='todos_todo_delete'),
+
+    path('todos/todo/update_status/<slug:slug>/', views.TodoUpdateDoneView.as_view(), name='todos_todo_update_status'),
 )
 

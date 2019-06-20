@@ -6,23 +6,37 @@
 {% block content %}
 {{ block.super}}
 
-<div class="box box-primary">
-    <div class="box-header with-border">
-        <h3 class="box-title">Detail</h3>
+<div class="row">
+    <div class="col-md-3">
+        <div class="box box-primary">
+            <div class="box-body">
+
+                <form method="get">
+                    {{form|crispy}}
+                    <button type="submit" class="btn btn-success">Search</button>
+                    <a href="{% url 'todos_todo_list' %}" class="btn btn-primary">Reset</a>
+                </form>
+
+            </div>
+        </div>
     </div>
-    <div class="box-body">
-        <form method="get">
-            {{form|crispy}}
-            <button type="submit" class="btn btn-success">Search</button>
-        </form>
+    <div class="col-md-9">
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <h3 class="box-title">Detail</h3>
+            </div>
+            <div class="box-body">
 
-        {% render_table table %}
+                {% render_table table %}
 
-        <a class="btn btn-primary" href="{% url 'todos_todo_create' %}">Create new Todo</a>
+                <a class="btn btn-primary" href="{% url 'todos_todo_create' %}">Create new Todo</a>
 
+            </div>
+
+        </div>
     </div>
-
 </div>
+
 {% endblock %}
 
 {% block modal %}

@@ -9,7 +9,7 @@ class TodoTable(tables.Table):
     detail = tables.TemplateColumn(template_name='todos/table/detail.html')
     class Meta:
         model = Todo
-        fields = ['id', 'title', 'created']
+        fields = ['id', 'title', 'status_str', 'created']
         template_name = 'django_tables2/bootstrap.html'
 
 
