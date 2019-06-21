@@ -8,6 +8,7 @@ from . import forms
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.shortcuts import redirect
+from django.contrib import messages
 
 class TodoListView(LoginRequiredMixin, django_tables2.SingleTableView):
     model = Todo
@@ -37,6 +38,9 @@ class TodoCreateView(LoginRequiredMixin, CreateView):
         return form
 
     def get_success_url(self):
+        messages.success(
+            self.request,
+            "Data successful created", )
         return reverse_lazy('todos_todo_list')
 
 
@@ -44,8 +48,10 @@ class TodoDeleteView(LoginRequiredMixin, DeleteView):
     model = Todo
 
     def get_success_url(self):
+        messages.success(
+            self.request,
+            "Data successful deleted",)
         return reverse_lazy('todos_todo_list')
-
 
 class TodoDetailView(LoginRequiredMixin,DetailView):
     model = Todo
@@ -66,6 +72,9 @@ class TodoUpdateView(LoginRequiredMixin,UpdateView):
         return form
 
     def get_success_url(self):
+        messages.success(
+            self.request,
+            "Data successful updated", )
         return reverse_lazy('todos_todo_list')
 
 
@@ -79,5 +88,8 @@ class TodoUpdateDoneView(LoginRequiredMixin, UpdateView):
         return form
 
     def get_success_url(self):
+        messages.success(
+            self.request,
+            "Success change status", )
         return reverse_lazy('todos_todo_list')
 

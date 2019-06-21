@@ -19,7 +19,7 @@ class TodoForm(forms.ModelForm):
 
     class Meta:
         model = Todo
-        fields = ['title', 'description', 'status']
+        fields = ['title', 'description']
 
 
 class TodoUpdateStatusForm(forms.ModelForm):
@@ -27,7 +27,6 @@ class TodoUpdateStatusForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
-
 
     def save(self, commit=True):
         model: Todo = super(TodoUpdateStatusForm, self).save(commit=False)

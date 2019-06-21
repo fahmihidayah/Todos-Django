@@ -38,10 +38,10 @@
 
             {% if object.status == 1 %}
                 <input type="hidden" name="status" value="2"/>
-                <button class="btn btn-success" href="{{object.get_update_url}}">Set Done</button>
+                <button class="btn btn-success">Set Done</button>
             {% else %}
                 <input type="hidden" name="status" value="1"/>
-                <button class="btn btn-primary" href="{{object.get_update_url}}">Set Not Done</button>
+                <button class="btn btn-primary">Set Not Done</button>
             {% endif %}
         </form>
 

@@ -7,6 +7,9 @@ class TodoTable(tables.Table):
     delete = tables.TemplateColumn(template_name='todos/table/delete.html')
 
     detail = tables.TemplateColumn(template_name='todos/table/detail.html')
+
+    change_status = tables.TemplateColumn(template_name='todos/table/set_done.html')
+
     class Meta:
         model = Todo
         fields = ['id', 'title', 'status_str', 'created']
