@@ -1,0 +1,9 @@
+Todo
+1. Add base directory python to handle common action model view template
+2. Add Authorization for user permission
+3. Make directory for many view
+4. Add Project model and comment model
+5. Add soft deletion
+6. Add bulk deletion (check boxes)
+7. Add update bulk (check boxes)
+8. import CSV
