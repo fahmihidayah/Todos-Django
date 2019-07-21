@@ -10,6 +10,7 @@ from django.urls import reverse_lazy
 from django.shortcuts import redirect
 from django.contrib import messages
 
+
 class TodoListView(LoginRequiredMixin, django_tables2.SingleTableView):
     model = Todo
     paginate_by = 10
@@ -27,6 +28,7 @@ class TodoListView(LoginRequiredMixin, django_tables2.SingleTableView):
                 return self.model.objects.filter(user=self.request.user).filter(title__icontains=keyword).filter(status=status)
         except:
             return self.model.objects.filter(user=self.request.user)
+
 
 class TodoCreateView(LoginRequiredMixin, CreateView):
     model = Todo
@@ -52,6 +54,7 @@ class TodoDeleteView(LoginRequiredMixin, DeleteView):
             self.request,
             "Data successful deleted",)
         return reverse_lazy('todos_todo_list')
+
 
 class TodoDetailView(LoginRequiredMixin,DetailView):
     model = Todo

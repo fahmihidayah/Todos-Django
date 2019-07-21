@@ -14,4 +14,4 @@ django-extensions==2.1.5
 djangorestframework==3.9.1
 uwsgi==2.0.18
 psycopg2-binary==2.7.5
-sqlclient==0.0
+gunicorn==19.9.0

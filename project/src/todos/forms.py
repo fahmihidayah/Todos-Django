@@ -10,6 +10,10 @@ from .models import Todo
 
 
 class TodoForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.user = None
+        self.helper = FormHelper()
 
     def save(self, commit=True):
         model: Todo= super(TodoForm, self).save(commit=False)
