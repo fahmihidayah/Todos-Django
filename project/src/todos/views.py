@@ -1,4 +1,4 @@
-from django.views.generic import DetailView, ListView, UpdateView, CreateView, DeleteView
+from django.views.generic import DetailView, ListView, UpdateView, CreateView, DeleteView, TemplateView
 from .models import Todo
 from .forms import TodoForm
 from . import tables
@@ -96,3 +96,7 @@ class TodoUpdateDoneView(LoginRequiredMixin, UpdateView):
             "Success change status", )
         return reverse_lazy('todos_todo_list')
 
+
+
+class TestView(TemplateView):
+    template_name = "test_template.html"

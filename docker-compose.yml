@@ -1,0 +1,27 @@
+version : "2"
+
+services:
+  nginx:
+    image: nginx:latest
+    container_name: nginx-django
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/src
+      - .
+  web:
+    build: .
+    volumes:
+      - .:/usr/src/app
+    image: django-todo-1
+
+
+
+#nginx:
+#  build: ./nginx
+#  volumes:
+#    - .:/usr/src/app
+#  links:
+#    - django
+#  ports:
+#    - "80:80"

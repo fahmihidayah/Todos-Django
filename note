@@ -7,3 +7,6 @@ using pip install --upgrade pip
 - use this to install aragon
 python -m pip install argon2-cffi
 3. error still happen not loading css or js, solution :
+
+django docker nginx gunicorn :
+https://ruddra.com/posts/docker-django-nginx-postgres/

@@ -2,6 +2,7 @@
 #    DJANGO_SETTINGS_MODULE=project.settings.production
 from .base import *  # NOQA
 import logging.config
+import os
 
 # For security and performance reasons, DEBUG is turned off
 DEBUG = False
@@ -47,6 +48,9 @@ STATIC_ROOT = str(BASE_DIR.parent / "site" / "static")
 
 # Log everything to the logs directory at the top
 LOGFILE_ROOT = BASE_DIR.parent / "logs"
+
+
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "static"),  os.path.join(os.path.join(BASE_DIR.parent, "site"), "static")]
 
 # Reset logging
 LOGGING_CONFIG = None

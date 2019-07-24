@@ -12,7 +12,7 @@ from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / "directory"
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
-STATICFILES_DIRS = [str(BASE_DIR / "static")]
+STATICFILES_DIRS = [str(BASE_DIR / "static"),  str(BASE_DIR.parent / "site" / "static")]
 MEDIA_ROOT = str(BASE_DIR / "media")
 MEDIA_URL = "/media/"
 
@@ -139,3 +139,5 @@ LOGIN_REDIRECT_URL = reverse_lazy("profiles:show_self")
 LOGIN_URL = reverse_lazy("accounts:login")
 
 THUMBNAIL_EXTENSION = "png"  # Or any extn for your thumbnails
+
+# STATIC_ROOT = str(BASE_DIR.parent / "site" / "static")
