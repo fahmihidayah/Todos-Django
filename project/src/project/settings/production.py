@@ -27,7 +27,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 # Must mention ALLOWED_HOSTS in production!
-ALLOWED_HOSTS = ["127.0.0.1"]
+ALLOWED_HOSTS = ["127.0.0.1", "web"]
 
 # Cache the templates in memory for speed-up
 loaders = [
