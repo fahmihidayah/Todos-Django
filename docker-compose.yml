@@ -32,17 +32,3 @@ services:
       - POSTGRESQL_PASSWORD=root
     ports:
       - "5432:5432"
-
-#    python3 /usr/src/app/project/src/manage.py runserver 0.0.0.0:8001
-#    command: ["gunicorn", "-c", "project/conf.py", "project.wsgi"]
-#python manage.py makemigrations && python manage.py migrate &&
-
-
-#nginx:
-#  build: ./nginx
-#  volumes:
-#    - .:/usr/src/app
-#  links:
-#    - django
-#  ports:
-#    - "80:80"
