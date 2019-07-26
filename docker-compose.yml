@@ -14,12 +14,25 @@ services:
   web:
     restart: always
     build: .
-    container_name: web-django
+    container_name: web-django-todo
     volumes:
       - .:/usr/src/app
     expose:
       - "8001"
-    command: ["gunicorn", "-c", "project/conf.py", "project.wsgi"]
+    command: gunicorn -c project/conf.py project.wsgi
+    depends_on:
+      - db
+
+  db:
+    image: bitnami/postgresql
+    container_name: postgresql-todo
+    volumes:
+      - /Users/fahmi/Documents/docker_volume/postgresql-bitnamo-1/:/bitnami/postgresql
+    environment:
+      - POSTGRESQL_PASSWORD=root
+    ports:
+      - "5432:5432"
+
 #    python3 /usr/src/app/project/src/manage.py runserver 0.0.0.0:8001
 #    command: ["gunicorn", "-c", "project/conf.py", "project.wsgi"]
 #python manage.py makemigrations && python manage.py migrate &&

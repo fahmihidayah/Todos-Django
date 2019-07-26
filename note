@@ -10,3 +10,10 @@ python -m pip install argon2-cffi
 
 django docker nginx gunicorn :
 https://ruddra.com/posts/docker-django-nginx-postgres/
+
+note for POSTGRES or MYSQL :
+1. pull bitnami/postgresql
+2. run docker run -p 5432:5432 -e POSTGRES_PASSWORD={yourpass} -v ~PWD/presistance:/bitnami/postgresql -d bitnami/postgresql
+3. create database from python project : python project/src/manage.py makemigrations or migrate
+
+docker-compose
