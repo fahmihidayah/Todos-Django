@@ -11,11 +11,10 @@ class TodoAdminForm(forms.ModelForm):
 
 class TodoAdmin(admin.ModelAdmin):
     form = TodoAdminForm
-    list_display = ['title', 'slug', 'created', 'last_updated', 'description']
-    readonly_fields = ['title', 'slug', 'created', 'last_updated', 'description']
+    list_display = ['title', 'slug', 'created', 'last_updated', 'description', 'status']
+    readonly_fields = ['title', 'slug', 'created', 'last_updated', 'description', 'status']
 
 admin.site.register(Todo, TodoAdmin)
-
 
 
 class ProjectAdminForm(forms.ModelForm):

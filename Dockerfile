@@ -6,7 +6,7 @@ COPY . .
 
 RUN pip install -r project/requirements.txt && pip install --upgrade pip && python -m pip install argon2-cffi
 
-EXPOSE 8001
+#EXPOSE 8001
 
 #ENTRYPOINT ["/usr/src/app/"]
 

@@ -11,7 +11,6 @@ class TodoViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
 
 
-
 class ProjectViewSet(viewsets.ModelViewSet):
     """ViewSet for the Project class"""
 

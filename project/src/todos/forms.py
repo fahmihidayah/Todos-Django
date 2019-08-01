@@ -6,7 +6,8 @@ from crispy_forms.layout import Layout, Submit, HTML, Field, Fieldset
 from authtools import forms as authtoolsforms
 from django.contrib.auth import forms as authforms
 from django.urls import reverse
-from .models import Todo
+
+from .models import Todo, Project, Comment
 
 
 class TodoForm(forms.ModelForm):
@@ -16,14 +17,14 @@ class TodoForm(forms.ModelForm):
         self.helper = FormHelper()
 
     def save(self, commit=True):
-        model: Todo= super(TodoForm, self).save(commit=False)
+        model: Todo = super(TodoForm, self).save(commit=False)
         model.user = self.user
         model.save()
         return model
 
     class Meta:
         model = Todo
-        fields = ['title', 'description']
+        fields = ['title', 'description', 'project']
 
 
 class TodoUpdateStatusForm(forms.ModelForm):
@@ -54,6 +55,33 @@ class SearchForm(forms.Form):
             Field('search', css_class="form-control")
         )
         self.fields['search'].required = False
+
+
+
+class ProjectForm(forms.ModelForm):
+
+    def save(self, commit=True):
+        model: Project = super(ProjectForm, self).save(commit=False)
+        model.user = self.user
+        model.save()
+        return model
+
+    class Meta:
+        model = Project
+        fields = ['name']
+
+
+class CommentForm(forms.ModelForm):
+
+    def save(self, commit=True):
+        model: Comment = super(CommentForm, self).save(commit=False)
+        model.user = self.user
+        model.save()
+        return model
+
+    class Meta:
+        model = Comment
+        fields = ['text', 'todo', 'user']
 
 
 

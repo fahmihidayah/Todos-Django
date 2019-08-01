@@ -13,6 +13,7 @@ class TodoSerializer(serializers.ModelSerializer):
             'created', 
             'last_updated', 
             'description', 
+            'status', 
         )
 
 
@@ -21,10 +22,10 @@ class ProjectSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Project
         fields = (
-            'slug',
-            'name',
-            'created',
-            'last_updated',
+            'slug', 
+            'name', 
+            'created', 
+            'last_updated', 
         )
 
 
@@ -33,11 +34,10 @@ class CommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Comment
         fields = (
-            'slug',
-            'text',
-            'created',
-            'last_updated',
+            'slug', 
+            'text', 
+            'created', 
+            'last_updated', 
         )
-
 
 

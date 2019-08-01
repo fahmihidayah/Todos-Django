@@ -1,5 +1,6 @@
 from django.urls import reverse
 from django_extensions.db.fields import AutoSlugField
+from django.db.models import BooleanField
 from django.db.models import CharField
 from django.db.models import DateTimeField
 from django.db.models import TextField
@@ -21,17 +22,16 @@ class Todo(models.Model):
     created = models.DateTimeField(auto_now_add=True, editable=False)
     last_updated = models.DateTimeField(auto_now=True, editable=False)
     description = models.TextField(max_length=225)
-    status = models.IntegerField(default=1)
+    status = models.BooleanField()
 
     # Relationship Fields
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE, related_name="todos", 
     )
-
     project = models.ForeignKey(
         'todos.Project',
-        on_delete=models.CASCADE, related_name="todos",
+        on_delete=models.CASCADE, related_name="todos", 
     )
 
     class Meta:
@@ -40,30 +40,12 @@ class Todo(models.Model):
     def __unicode__(self):
         return u'%s' % self.slug
 
-    @property
-    def status_str(self) -> str:
-        return "New" if self.status == 1 else "Done"
-
-    @property
-    def get_list_url(self):
-        return reverse('todos_todo_list')
-
-    @property
     def get_absolute_url(self):
         return reverse('todos_todo_detail', args=(self.slug,))
 
-    @property
+
     def get_update_url(self):
         return reverse('todos_todo_update', args=(self.slug,))
-
-    @property
-    def get_update_status_url(self):
-        return reverse('todos_todo_update_status', args=(self.slug,))
-
-    @property
-    def get_delete_url(self):
-        return reverse('todos_todo_delete', args=(self.slug,))
-
 
 
 class Project(models.Model):
@@ -74,16 +56,9 @@ class Project(models.Model):
     created = models.DateTimeField(auto_now_add=True, editable=False)
     last_updated = models.DateTimeField(auto_now=True, editable=False)
 
-    user = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        on_delete=models.CASCADE, related_name="project",
-    )
 
     class Meta:
         ordering = ('-created',)
-
-    def __str__(self):
-        return self.name
 
     def __unicode__(self):
         return u'%s' % self.slug
@@ -94,12 +69,6 @@ class Project(models.Model):
 
     def get_update_url(self):
         return reverse('todos_project_update', args=(self.slug,))
-
-    def get_delete_url(self):
-        return reverse('todos_project_delete', args=(self.slug,))
-
-    def get_list_todo(self):
-        return reverse('todos_todo_list', args=(self.pk,))
 
 
 class Comment(models.Model):
@@ -113,11 +82,11 @@ class Comment(models.Model):
     # Relationship Fields
     todo = models.ForeignKey(
         'todos.Todo',
-        on_delete=models.CASCADE, related_name="comments",
+        on_delete=models.CASCADE, related_name="comments", 
     )
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
-        on_delete=models.CASCADE, related_name="comments",
+        on_delete=models.CASCADE, related_name="comments", 
     )
 
     class Meta:
@@ -132,9 +101,5 @@ class Comment(models.Model):
 
     def get_update_url(self):
         return reverse('todos_comment_update', args=(self.slug,))
-
-
-    def get_delete_url(self):
-        return reverse('todos_comment_delete', args=(self.slug,))
 
 
